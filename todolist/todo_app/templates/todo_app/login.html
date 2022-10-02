@@ -1,0 +1,36 @@
+{% extends 'todo_app/base.html' %}
+{% block menu %}
+	<ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+		<li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная</a></li>
+		<li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Регитсрация</a></li>
+		<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Вход</a></li>
+	</ul>
+{% endblock %}
+{% block content %}
+	<div class="text-center">
+		<h1>Вход</h1>
+	</div>
+	<div class="container-fluid d-flex justify-content-center align-items-center p-2 border border-primary">
+		<form method="POST" class="post-form">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="form-group">
+					{{field.label_tag}}
+					<div class="form-control ">{{field}}</div>
+						{% if field.errors%}
+							{% for error in field.errors %}
+								<div class="alert alert-danger">
+									{{error}}
+								</div>
+							{% endfor %}
+						{% endif %}
+				</div>
+			{% endfor %}
+			<button class="btn btn-primary" type="submit">Войти</button>
+			</div>
+		</form>
+	</div>
+	
+{% endblock %}
+{% block footer %}
+{% endblock %}
